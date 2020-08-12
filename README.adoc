@@ -20,7 +20,7 @@ Notes:
 * For the binary (executable) case, the only difference observed between `panic=abort` and enabling the `coredump` crate is which signal terminated the process.  `coredump` did not allow a panic to be caught.  Note that in these tests, `ulimit -c` was already set to `unlimited`.  The "coredump" crate does reconfigure this to enable core files, so this would be a difference in other environments.
 * For the integration test case, `coredump` actually causes a core file to be created, while `panic = "abort"` is ignored.  (Se below.)
 * In the integration test version, `panic = abort` has no effect.  This is mostly as documented, although as of this writing it's unclear if this is supposed to be altered by https://github.com/rust-lang/rust/pull/64158#issuecomment-672098008[panic-abort-tests] (which we do use below).
-* In the integration test version, the panic cannot be caught if _either_ `panic = abort` or the "coredump" crate is enabled, even though the former did not result in generating a core file.
+* The panic cannot be caught if _either_ `panic = abort` or the "coredump" crate is enabled, even when the former did not result in generating a core file (e.g., in the integration test).  This is consistent with the https://doc.rust-lang.org/std/panic/fn.catch_unwind.html[documentation for catch_unwind], which says that it does not catch panics when `panic` is not `unwind`.
 
 === Binary (executable)
 
@@ -160,6 +160,9 @@ Notes:
 
 |===
 
+This behavior was a little surprising for the integration test case.  I dug into the implementation a bit.  Before running our test function, https://github.com/rust-lang/rust/blob/1.45.2/src/libtest/lib.rs#L640[the Rust test runner creates a panic hook] that records the result, runs any _previous_ hook (which we would not expect to be there, even when we enable "coredump", because that happens later), and then potentially exits the process.  Now, if we've enabled the "coredump" crate, it will invoke the existing hook, then raise `SIGQUIT`.  So the expected behavior is that the process would be terminated by `SIGQUIT`, and that's what we see.
+
+Why doesn't `panic = abort` work even with `-Z panic-abort-tests`?  I have confirmed that for my test program, `__rust_start_panic` refers to the `abort` implementation, despite the warning in the output that the value is being ignored.  (Cargo bug?)  However, the hook that gets installed by the test runner in this case (see above) explicitly exits the process, and this runs before the real panic runtime, so we never get to the abort call.
 
 
 == Raw output
