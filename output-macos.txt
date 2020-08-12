@@ -1,0 +1,247 @@
+uname:     Darwin zathras.local 19.5.0 Darwin Kernel Version 19.5.0: Tue May 26 20:41:44 PDT 2020; root:xnu-6153.121.2~2/RELEASE_X86_64 x86_64
+cargo:     cargo 1.45.1 (f242df6ed 2020-07-22)
+ulimit -c: unlimited
+------------------------------------
+panic strategy:     unwind
+use coredump crate: false
+try to catch panic: false
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run -- false false
+   Compiling experiment-rust-coredump v0.1.0 (/Users/dap/oxide/experiments/rust-coredump)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.69s
+     Running `target/debug/experiment-rust-coredump false false`
+pid 33821
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x10168917e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x1016a47ac - core::fmt::write::ha0b53fc066268c71
+   2:        0x101687867 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10168b155 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10168ae92 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10168b6ad - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x1016a86be - std::panicking::begin_panic::hdc3fb81190c95829
+   7:        0x101679fd1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+   8:        0x101679f25 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+   9:        0x101679db1 - experiment_rust_coredump::main::h57b9f627558c2bb9
+  10:        0x101676e5e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  11:        0x10168b979 - std::rt::lang_start_internal::hbec44ff873a30990
+  12:        0x101676e41 - std::rt::lang_start::h039f7620a4816ae5
+  13:        0x10167a002 - main
++ echo 'bash exit status = 101'
+bash exit status = 101
+
+------------------------------------
+panic strategy:     unwind
+use coredump crate: false
+try to catch panic: true
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run -- false true
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/experiment-rust-coredump false true`
+pid 33847
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x10f3ff17e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10f41a7ac - core::fmt::write::ha0b53fc066268c71
+   2:        0x10f3fd867 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10f401155 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10f400e92 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10f4016ad - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x10f41e6be - std::panicking::begin_panic::hdc3fb81190c95829
+   7:        0x10f3effd1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+   8:        0x10f3eff25 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+   9:        0x10f3ecdec - experiment_rust_coredump::main::{{closure}}::h10bca74824502aca
+  10:        0x10f3edb7e - std::panicking::try::do_call::h60ec7bd3624af209
+  11:        0x10f3edd9d - __rust_try
+  12:        0x10f3edb06 - std::panicking::try::h754f0f4568d8e3b1
+  13:        0x10f3f114d - std::panic::catch_unwind::he0d8cd6108b5418f
+  14:        0x10f3efdef - experiment_rust_coredump::main::h57b9f627558c2bb9
+  15:        0x10f3ece5e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  16:        0x10f401979 - std::rt::lang_start_internal::hbec44ff873a30990
+  17:        0x10f3ece41 - std::rt::lang_start::h039f7620a4816ae5
+  18:        0x10f3f0002 - main
+caught! result: Err(Any)
++ echo 'bash exit status = 0'
+bash exit status = 0
+
+------------------------------------
+panic strategy:     unwind
+use coredump crate: true
+try to catch panic: false
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run -- true false
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump true false`
+registering panic handler from "coredump" crate
+pid 33849
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x10a82e17e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10a8497ac - core::fmt::write::ha0b53fc066268c71
+   2:        0x10a82c867 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10a830155 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10a82fe92 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10a823bd7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
+   6:        0x10a821cf1 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
+   7:        0x10a8306d5 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   8:        0x10a84d6be - std::panicking::begin_panic::hdc3fb81190c95829
+   9:        0x10a81efd1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+  10:        0x10a81ef25 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+  11:        0x10a81edb1 - experiment_rust_coredump::main::h57b9f627558c2bb9
+  12:        0x10a81be5e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  13:        0x10a830979 - std::rt::lang_start_internal::hbec44ff873a30990
+  14:        0x10a81be41 - std::rt::lang_start::h039f7620a4816ae5
+  15:        0x10a81f002 - main
+./run_all.sh: line 22: 33849 Quit: 3                 (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 131'
+bash exit status = 131
+
+------------------------------------
+panic strategy:     unwind
+use coredump crate: true
+try to catch panic: true
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run -- true true
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump true true`
+registering panic handler from "coredump" crate
+pid 33851
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x1049f717e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x104a127ac - core::fmt::write::ha0b53fc066268c71
+   2:        0x1049f5867 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x1049f9155 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x1049f8e92 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x1049ecbd7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
+   6:        0x1049eacf1 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
+   7:        0x1049f96d5 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   8:        0x104a166be - std::panicking::begin_panic::hdc3fb81190c95829
+   9:        0x1049e7fd1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+  10:        0x1049e7f25 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+  11:        0x1049e4dec - experiment_rust_coredump::main::{{closure}}::h10bca74824502aca
+  12:        0x1049e5b7e - std::panicking::try::do_call::h60ec7bd3624af209
+  13:        0x1049e5d9d - __rust_try
+  14:        0x1049e5b06 - std::panicking::try::h754f0f4568d8e3b1
+  15:        0x1049e914d - std::panic::catch_unwind::he0d8cd6108b5418f
+  16:        0x1049e7def - experiment_rust_coredump::main::h57b9f627558c2bb9
+  17:        0x1049e4e5e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  18:        0x1049f9979 - std::rt::lang_start_internal::hbec44ff873a30990
+  19:        0x1049e4e41 - std::rt::lang_start::h039f7620a4816ae5
+  20:        0x1049e8002 - main
+./run_all.sh: line 22: 33851 Quit: 3                 (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 131'
+bash exit status = 131
+
+------------------------------------
+panic strategy:     abort
+use coredump crate: false
+try to catch panic: false
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=abort
++ cargo run -- false false
+   Compiling experiment-rust-coredump v0.1.0 (/Users/dap/oxide/experiments/rust-coredump)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.56s
+     Running `target/debug/experiment-rust-coredump false false`
+pid 33853
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x10151a31e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10153524c - core::fmt::write::ha0b53fc066268c71
+   2:        0x101518a07 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10151c2b5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10151bff2 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10151c80d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x10153913a - std::panicking::begin_panic::hdc3fb81190c95829
+   7:        0x10150bbb1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+   8:        0x10150bb05 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+   9:        0x10150b9d2 - experiment_rust_coredump::main::h57b9f627558c2bb9
+./run_all.sh: line 22: 33853 Abort trap: 6           (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 134'
+bash exit status = 134
+
+------------------------------------
+panic strategy:     abort
+use coredump crate: false
+try to catch panic: true
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=abort
++ cargo run -- false true
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump false true`
+pid 33870
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x1075a431e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x1075bf24c - core::fmt::write::ha0b53fc066268c71
+   2:        0x1075a2a07 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x1075a62b5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x1075a5ff2 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x1075a680d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x1075c313a - std::panicking::begin_panic::hdc3fb81190c95829
+   7:        0x107595bb1 - experiment_rust_coredump::bar::hf5be5eac77bdaae0
+   8:        0x107595b05 - experiment_rust_coredump::foo::h196f1ee776f7bb35
+./run_all.sh: line 22: 33870 Abort trap: 6           (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 134'
+bash exit status = 134
+
+------------------------------------
+panic strategy:     abort
+use coredump crate: true
+try to catch panic: false
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=abort
++ cargo run -- true false
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump true false`
+registering panic handler from "coredump" crate
+pid 33872
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x1029b231e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x1029cd24c - core::fmt::write::ha0b53fc066268c71
+   2:        0x1029b0a07 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x1029b42b5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x1029b3ff2 - std::panicking::default_hook::hd9eda5765f18f021
+./run_all.sh: line 22: 33872 Quit: 3                 (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 131'
+bash exit status = 131
+
+------------------------------------
+panic strategy:     abort
+use coredump crate: true
+try to catch panic: true
++ RUST_BACKTRACE=full
++ CARGO_PROFILE_DEV_PANIC=abort
++ cargo run -- true true
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump true true`
+registering panic handler from "coredump" crate
+pid 33874
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/main.rs:46:5
+stack backtrace:
+   0:        0x1051f831e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10521324c - core::fmt::write::ha0b53fc066268c71
+   2:        0x1051f6a07 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x1051fa2b5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x1051f9ff2 - std::panicking::default_hook::hd9eda5765f18f021
+./run_all.sh: line 22: 33874 Quit: 3                 (core dumped) RUST_BACKTRACE=full CARGO_PROFILE_DEV_PANIC=$strategy cargo run -- $use_crate $try_catch
++ echo 'bash exit status = 131'
+bash exit status = 131
+
