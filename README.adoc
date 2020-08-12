@@ -5,9 +5,9 @@
 
 This repo has a test program that's used to compare the behavior of the https://crates.io/crates/coredump[coredump] crate with the built in `panic = abort` behavior.  The program itself sets up some configuration as requested and then panics.  There's a wrapper script `run_all.sh` that runs all combinations of configuration:
 
-* `panic = abort` or `panic = unwind` (see https://doc.rust-lang.org/cargo/reference/profiles.html#panic[Cargo's panic configuration]
+* `panic = abort` or `panic = unwind` (see https://doc.rust-lang.org/cargo/reference/profiles.html#panic[Cargo's panic configuration])
 * use the coredump crate (true/false)
-* whether the program tries to catch the panic
+* whether the program tries to catch the panic (true/false)
 
 In all cases we set RUST_BACKTRACE=full to show the full stack trace.
 
@@ -18,6 +18,10 @@ Notes:
 * In all configurations, the stack trace is pretty-printed before the process dumps core.
 * In all of the core files generated, `foo` and `bar` appear on the stack (i.e., in no case was the stack unwound before generating the core file).
 * The only difference observed between `panic=abort` and enabling the `coredump` crate is which signal terminated the process.  `coredump` did not allow a panic to be caught.  Note that in these tests, `ulimit -c` was already set to `unlimited`.  The "coredump" crate does reconfigure this to enable core files, so this would be a difference in other environments.
+* In the integration test version, the panic cannot be caught if _either_ `panic = abort` or the "coredump" crate is enabled, even though the former did not result in generating a core file.
+* In the integration test version, `panic = abort` has no effect.  This is mostly as documented, although as of this writing it's unclear if this is supposed to be altered by https://github.com/rust-lang/rust/pull/64158#issuecomment-672098008[panic-abort-tests] (which we do use below).
+
+=== Binary (executable)
 
 [cols="2s,4s,2s,4,1,1", options="header"]
 |===
@@ -85,6 +89,77 @@ Notes:
 | No
 
 |===
+
+=== Integration test
+
+[cols="2s,4s,2s,4,1,1", options="header"]
+|===
+| panic strategy
+| enable "coredump" crate
+| attempt to catch panic
+| bash exit status
+| created core file?
+| caught panic?
+
+| unwind
+| "coredump" crate disabled
+| no catch
+| test runner status 101 (test runner handles panic)
+| No
+| --
+
+| unwind
+| "coredump" crate disabled
+| catch
+| 0 (no error because the panic was caught)
+| No
+| Yes
+
+| unwind
+| "coredump" crate enabled
+| no catch
+| test runner status 101, reports process itself terminated by signal `SIGQUIT`
+| Yes
+| --
+
+| unwind
+| "coredump" crate enabled
+| catch
+| test runner status 101, reports process itself terminated by signal `SIGQUIT`
+| Yes
+| No
+
+| abort
+| "coredump" crate disabled
+| no catch
+| test runner status 101 (test runner handles panic)
+| No
+| --
+
+| abort
+| "coredump" crate disabled
+| catch
+| test runner status 101 (test runner handles panic)
+| No
+| No
+
+| abort
+| "coredump" crate enabled
+| no catch
+| test runner status 101 (test runner handles panic)
+| No
+| --
+
+| abort
+| "coredump" crate enabled
+| catch
+| test runner status 101 (test runner handles panic)
+| No
+| No
+
+|===
+
+
 
 == Raw output
 
