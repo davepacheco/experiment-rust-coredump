@@ -11,171 +11,182 @@ try to catch panic: false
 + ECD_USE_COREDUMP=false
 + ECD_CATCH=false
 + CARGO_PROFILE_DEV_PANIC=unwind
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.11s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-pid 35629
-hello world; about to panic
-thread 'main' panicked at 'boom', src/lib.rs:40:5
-stack backtrace:
-   0:        0x105de653e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x105e01b8c - core::fmt::write::ha0b53fc066268c71
-   2:        0x105de4c67 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x105de84c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x105de8202 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x105de8a1d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   6:        0x105e05a9e - std::panicking::begin_panic::h77480d9b5506df3e
-   7:        0x105dd7b81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
-   8:        0x105dd7ad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
-   9:        0x105dd792c - experiment_rust_coredump::do_test::h9a581d8914b0dd02
-  10:        0x105dd5f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
-  11:        0x105dd5e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
-  12:        0x105de8ce9 - std::rt::lang_start_internal::hbec44ff873a30990
-  13:        0x105dd5e71 - std::rt::lang_start::h039f7620a4816ae5
-  14:        0x105dd5fe2 - main
-
-------------------------------------
-mode:               executable binary
-panic strategy:     unwind
-use coredump crate: false
-try to catch panic: true
-+ RUST_BACKTRACE=full
-+ ECD_USE_COREDUMP=false
-+ ECD_CATCH=true
-+ CARGO_PROFILE_DEV_PANIC=unwind
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-pid 35634
-attempting to catch panic
-hello world; about to panic
-thread 'main' panicked at 'boom', src/lib.rs:40:5
-stack backtrace:
-   0:        0x1056b153e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x1056ccb8c - core::fmt::write::ha0b53fc066268c71
-   2:        0x1056afc67 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x1056b34c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x1056b3202 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x1056b3a1d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   6:        0x1056d0a9e - std::panicking::begin_panic::h77480d9b5506df3e
-   7:        0x1056a2b81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
-   8:        0x1056a2ad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
-   9:        0x1056a184c - experiment_rust_coredump::do_test::{{closure}}::h5f88ebc9295271bb
-  10:        0x1056a1a8e - std::panicking::try::do_call::h4d046d0c32d5c5f5
-  11:        0x1056a1cad - __rust_try
-  12:        0x1056a1a16 - std::panicking::try::h2d52cbf1e30d867b
-  13:        0x1056a198d - std::panic::catch_unwind::hd07f61da3f9a9814
-  14:        0x1056a297a - experiment_rust_coredump::do_test::h9a581d8914b0dd02
-  15:        0x1056a0f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
-  16:        0x1056a0e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
-  17:        0x1056b3ce9 - std::rt::lang_start_internal::hbec44ff873a30990
-  18:        0x1056a0e71 - std::rt::lang_start::h039f7620a4816ae5
-  19:        0x1056a0fe2 - main
-caught! result: Err(Any)
-
-------------------------------------
-mode:               executable binary
-panic strategy:     unwind
-use coredump crate: true
-try to catch panic: false
-+ RUST_BACKTRACE=full
-+ ECD_USE_COREDUMP=true
-+ ECD_CATCH=false
-+ CARGO_PROFILE_DEV_PANIC=unwind
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-registering panic handler from "coredump" crate
-pid 35636
-hello world; about to panic
-thread 'main' panicked at 'boom', src/lib.rs:40:5
-stack backtrace:
-   0:        0x10030253e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10031db8c - core::fmt::write::ha0b53fc066268c71
-   2:        0x100300c67 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x1003044c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x100304202 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x1002f8317 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
-   6:        0x1002f6431 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
-   7:        0x100304a45 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   8:        0x100321a9e - std::panicking::begin_panic::h77480d9b5506df3e
-   9:        0x1002f3b81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
-  10:        0x1002f3ad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
-  11:        0x1002f392c - experiment_rust_coredump::do_test::h9a581d8914b0dd02
-  12:        0x1002f1f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
-  13:        0x1002f1e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
-  14:        0x100304ce9 - std::rt::lang_start_internal::hbec44ff873a30990
-  15:        0x1002f1e71 - std::rt::lang_start::h039f7620a4816ae5
-  16:        0x1002f1fe2 - main
-./run_all.sh: line 23: 35636 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
-
-------------------------------------
-mode:               executable binary
-panic strategy:     unwind
-use coredump crate: true
-try to catch panic: true
-+ RUST_BACKTRACE=full
-+ ECD_USE_COREDUMP=true
-+ ECD_CATCH=true
-+ CARGO_PROFILE_DEV_PANIC=unwind
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.03s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-registering panic handler from "coredump" crate
-pid 35638
-attempting to catch panic
-hello world; about to panic
-thread 'main' panicked at 'boom', src/lib.rs:40:5
-stack backtrace:
-   0:        0x10c4c253e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10c4ddb8c - core::fmt::write::ha0b53fc066268c71
-   2:        0x10c4c0c67 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x10c4c44c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x10c4c4202 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x10c4b8317 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
-   6:        0x10c4b6431 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
-   7:        0x10c4c4a45 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   8:        0x10c4e1a9e - std::panicking::begin_panic::h77480d9b5506df3e
-   9:        0x10c4b3b81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
-  10:        0x10c4b3ad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
-  11:        0x10c4b284c - experiment_rust_coredump::do_test::{{closure}}::h5f88ebc9295271bb
-  12:        0x10c4b2a8e - std::panicking::try::do_call::h4d046d0c32d5c5f5
-  13:        0x10c4b2cad - __rust_try
-  14:        0x10c4b2a16 - std::panicking::try::h2d52cbf1e30d867b
-  15:        0x10c4b298d - std::panic::catch_unwind::hd07f61da3f9a9814
-  16:        0x10c4b397a - experiment_rust_coredump::do_test::h9a581d8914b0dd02
-  17:        0x10c4b1f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
-  18:        0x10c4b1e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
-  19:        0x10c4c4ce9 - std::rt::lang_start_internal::hbec44ff873a30990
-  20:        0x10c4b1e71 - std::rt::lang_start::h039f7620a4816ae5
-  21:        0x10c4b1fe2 - main
-./run_all.sh: line 23: 35638 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
-
-------------------------------------
-mode:               executable binary
-panic strategy:     abort
-use coredump crate: false
-try to catch panic: false
-+ RUST_BACKTRACE=full
-+ ECD_USE_COREDUMP=false
-+ ECD_CATCH=false
-+ CARGO_PROFILE_DEV_PANIC=abort
-+ cargo run echo 'bash exit status = 0'
++ cargo run
    Compiling experiment-rust-coredump v0.1.0 (/Users/dap/oxide/experiments/rust-coredump)
-    Finished dev [unoptimized + debuginfo] target(s) in 2.27s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-pid 35640
+    Finished dev [unoptimized + debuginfo] target(s) in 0.57s
+     Running `target/debug/experiment-rust-coredump`
+pid 36612
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10e24654e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10e26149c - core::fmt::write::ha0b53fc066268c71
-   2:        0x10e244c77 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x10e248495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x10e2481d2 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x10e2489ed - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   6:        0x10e26538a - std::panicking::begin_panic::ha2be0c30d7b08db6
-./run_all.sh: line 23: 35640 Abort trap: 6           (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
+   0:        0x102fba53e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x102fd5b8c - core::fmt::write::ha0b53fc066268c71
+   2:        0x102fb8c67 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x102fbc4c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x102fbc202 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x102fbca1d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x102fd9a9e - std::panicking::begin_panic::h77480d9b5506df3e
+   7:        0x102fabb81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
+   8:        0x102fabad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
+   9:        0x102fab92c - experiment_rust_coredump::do_test::h9a581d8914b0dd02
+  10:        0x102fa9f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
+  11:        0x102fa9e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  12:        0x102fbcce9 - std::rt::lang_start_internal::hbec44ff873a30990
+  13:        0x102fa9e71 - std::rt::lang_start::h039f7620a4816ae5
+  14:        0x102fa9fe2 - main
++ echo 'bash exit status = 101'
+bash exit status = 101
+
+------------------------------------
+mode:               executable binary
+panic strategy:     unwind
+use coredump crate: false
+try to catch panic: true
++ RUST_BACKTRACE=full
++ ECD_USE_COREDUMP=false
++ ECD_CATCH=true
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump`
+pid 36640
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/lib.rs:40:5
+stack backtrace:
+   0:        0x101e5f53e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x101e7ab8c - core::fmt::write::ha0b53fc066268c71
+   2:        0x101e5dc67 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x101e614c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x101e61202 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x101e61a1d - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x101e7ea9e - std::panicking::begin_panic::h77480d9b5506df3e
+   7:        0x101e50b81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
+   8:        0x101e50ad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
+   9:        0x101e4f84c - experiment_rust_coredump::do_test::{{closure}}::h5f88ebc9295271bb
+  10:        0x101e4fa8e - std::panicking::try::do_call::h4d046d0c32d5c5f5
+  11:        0x101e4fcad - __rust_try
+  12:        0x101e4fa16 - std::panicking::try::h2d52cbf1e30d867b
+  13:        0x101e4f98d - std::panic::catch_unwind::hd07f61da3f9a9814
+  14:        0x101e5097a - experiment_rust_coredump::do_test::h9a581d8914b0dd02
+  15:        0x101e4ef9d - experiment_rust_coredump::main::h57b9f627558c2bb9
+  16:        0x101e4ee8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  17:        0x101e61ce9 - std::rt::lang_start_internal::hbec44ff873a30990
+  18:        0x101e4ee71 - std::rt::lang_start::h039f7620a4816ae5
+  19:        0x101e4efe2 - main
+caught! result: Err(Any)
++ echo 'bash exit status = 0'
+bash exit status = 0
+
+------------------------------------
+mode:               executable binary
+panic strategy:     unwind
+use coredump crate: true
+try to catch panic: false
++ RUST_BACKTRACE=full
++ ECD_USE_COREDUMP=true
++ ECD_CATCH=false
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump`
+registering panic handler from "coredump" crate
+pid 36642
+hello world; about to panic
+thread 'main' panicked at 'boom', src/lib.rs:40:5
+stack backtrace:
+   0:        0x108c3a53e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x108c55b8c - core::fmt::write::ha0b53fc066268c71
+   2:        0x108c38c67 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x108c3c4c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x108c3c202 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x108c30317 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
+   6:        0x108c2e431 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
+   7:        0x108c3ca45 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   8:        0x108c59a9e - std::panicking::begin_panic::h77480d9b5506df3e
+   9:        0x108c2bb81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
+  10:        0x108c2bad5 - experiment_rust_coredump::foo::h01ef0a7f15334666
+  11:        0x108c2b92c - experiment_rust_coredump::do_test::h9a581d8914b0dd02
+  12:        0x108c29f9d - experiment_rust_coredump::main::h57b9f627558c2bb9
+  13:        0x108c29e8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  14:        0x108c3cce9 - std::rt::lang_start_internal::hbec44ff873a30990
+  15:        0x108c29e71 - std::rt::lang_start::h039f7620a4816ae5
+  16:        0x108c29fe2 - main
+./run_all.sh: line 23: 36642 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 131'
+bash exit status = 131
+
+------------------------------------
+mode:               executable binary
+panic strategy:     unwind
+use coredump crate: true
+try to catch panic: true
++ RUST_BACKTRACE=full
++ ECD_USE_COREDUMP=true
++ ECD_CATCH=true
++ CARGO_PROFILE_DEV_PANIC=unwind
++ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump`
+registering panic handler from "coredump" crate
+pid 36644
+attempting to catch panic
+hello world; about to panic
+thread 'main' panicked at 'boom', src/lib.rs:40:5
+stack backtrace:
+   0:        0x10545d53e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x105478b8c - core::fmt::write::ha0b53fc066268c71
+   2:        0x10545bc67 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10545f4c5 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10545f202 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x105453317 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h20ebf678df5dc633
+   6:        0x105451431 - coredump::register_panic_handler::{{closure}}::hbe1e4feff3a70725
+   7:        0x10545fa45 - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   8:        0x10547ca9e - std::panicking::begin_panic::h77480d9b5506df3e
+   9:        0x10544eb81 - experiment_rust_coredump::bar::hb6f6c5b2d81a7a76
+  10:        0x10544ead5 - experiment_rust_coredump::foo::h01ef0a7f15334666
+  11:        0x10544d84c - experiment_rust_coredump::do_test::{{closure}}::h5f88ebc9295271bb
+  12:        0x10544da8e - std::panicking::try::do_call::h4d046d0c32d5c5f5
+  13:        0x10544dcad - __rust_try
+  14:        0x10544da16 - std::panicking::try::h2d52cbf1e30d867b
+  15:        0x10544d98d - std::panic::catch_unwind::hd07f61da3f9a9814
+  16:        0x10544e97a - experiment_rust_coredump::do_test::h9a581d8914b0dd02
+  17:        0x10544cf9d - experiment_rust_coredump::main::h57b9f627558c2bb9
+  18:        0x10544ce8e - std::rt::lang_start::{{closure}}::hc358a3b6c2ff8331
+  19:        0x10545fce9 - std::rt::lang_start_internal::hbec44ff873a30990
+  20:        0x10544ce71 - std::rt::lang_start::h039f7620a4816ae5
+  21:        0x10544cfe2 - main
+./run_all.sh: line 23: 36644 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 131'
+bash exit status = 131
+
+------------------------------------
+mode:               executable binary
+panic strategy:     abort
+use coredump crate: false
+try to catch panic: false
++ RUST_BACKTRACE=full
++ ECD_USE_COREDUMP=false
++ ECD_CATCH=false
++ CARGO_PROFILE_DEV_PANIC=abort
++ cargo run
+   Compiling experiment-rust-coredump v0.1.0 (/Users/dap/oxide/experiments/rust-coredump)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.38s
+     Running `target/debug/experiment-rust-coredump`
+pid 36646
+hello world; about to panic
+thread 'main' panicked at 'boom', src/lib.rs:40:5
+stack backtrace:
+   0:        0x10214954e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10216449c - core::fmt::write::ha0b53fc066268c71
+   2:        0x102147c77 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10214b495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10214b1d2 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10214b9ed - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x10216838a - std::panicking::begin_panic::ha2be0c30d7b08db6
+./run_all.sh: line 23: 36646 Abort trap: 6           (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 134'
+bash exit status = 134
 
 ------------------------------------
 mode:               executable binary
@@ -186,22 +197,24 @@ try to catch panic: true
 + ECD_USE_COREDUMP=false
 + ECD_CATCH=true
 + CARGO_PROFILE_DEV_PANIC=abort
-+ cargo run echo 'bash exit status = 0'
++ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.01s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
-pid 35665
+     Running `target/debug/experiment-rust-coredump`
+pid 36663
 attempting to catch panic
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10476354e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10477e49c - core::fmt::write::ha0b53fc066268c71
-   2:        0x104761c77 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x104765495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x1047651d2 - std::panicking::default_hook::hd9eda5765f18f021
-   5:        0x1047659ed - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
-   6:        0x10478238a - std::panicking::begin_panic::ha2be0c30d7b08db6
-./run_all.sh: line 23: 35665 Abort trap: 6           (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
+   0:        0x10ee1254e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10ee2d49c - core::fmt::write::ha0b53fc066268c71
+   2:        0x10ee10c77 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10ee14495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10ee141d2 - std::panicking::default_hook::hd9eda5765f18f021
+   5:        0x10ee149ed - std::panicking::rust_panic_with_hook::h3fc8a110bc9d166f
+   6:        0x10ee3138a - std::panicking::begin_panic::ha2be0c30d7b08db6
+./run_all.sh: line 23: 36663 Abort trap: 6           (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 134'
+bash exit status = 134
 
 ------------------------------------
 mode:               executable binary
@@ -212,20 +225,22 @@ try to catch panic: false
 + ECD_USE_COREDUMP=true
 + ECD_CATCH=false
 + CARGO_PROFILE_DEV_PANIC=abort
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
++ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump`
 registering panic handler from "coredump" crate
-pid 35667
+pid 36665
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x1024e954e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10250449c - core::fmt::write::ha0b53fc066268c71
-   2:        0x1024e7c77 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x1024eb495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x1024eb1d2 - std::panicking::default_hook::hd9eda5765f18f021
-./run_all.sh: line 23: 35667 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
+   0:        0x10add154e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10adec49c - core::fmt::write::ha0b53fc066268c71
+   2:        0x10adcfc77 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10add3495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10add31d2 - std::panicking::default_hook::hd9eda5765f18f021
+./run_all.sh: line 23: 36665 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 131'
+bash exit status = 131
 
 ------------------------------------
 mode:               executable binary
@@ -236,21 +251,23 @@ try to catch panic: true
 + ECD_USE_COREDUMP=true
 + ECD_CATCH=true
 + CARGO_PROFILE_DEV_PANIC=abort
-+ cargo run echo 'bash exit status = 0'
-    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
-     Running `target/debug/experiment-rust-coredump echo 'bash exit status = 0'`
++ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
+     Running `target/debug/experiment-rust-coredump`
 registering panic handler from "coredump" crate
-pid 35669
+pid 36667
 attempting to catch panic
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10aadb54e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
-   1:        0x10aaf649c - core::fmt::write::ha0b53fc066268c71
-   2:        0x10aad9c77 - std::io::Write::write_fmt::h410b83a4c70c6549
-   3:        0x10aadd495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
-   4:        0x10aadd1d2 - std::panicking::default_hook::hd9eda5765f18f021
-./run_all.sh: line 23: 35669 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run echo "bash exit status = $?"
+   0:        0x10d3d254e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::h26e8f1b884bae128
+   1:        0x10d3ed49c - core::fmt::write::ha0b53fc066268c71
+   2:        0x10d3d0c77 - std::io::Write::write_fmt::h410b83a4c70c6549
+   3:        0x10d3d4495 - std::panicking::default_hook::{{closure}}::h70c11ad9e0ccd806
+   4:        0x10d3d41d2 - std::panicking::default_hook::hd9eda5765f18f021
+./run_all.sh: line 23: 36667 Quit: 3                 (core dumped) RUST_BACKTRACE=full ECD_USE_COREDUMP=$use_crate ECD_CATCH=$try_catch CARGO_PROFILE_DEV_PANIC=$strategy cargo run
++ echo 'bash exit status = 131'
+bash exit status = 131
 
 ------------------------------------
 mode:               integration test
@@ -264,7 +281,7 @@ try to catch panic: false
 + CARGO_PROFILE_TEST_PANIC=unwind
 + cargo +nightly test -Z panic-abort-tests -- --nocapture
 warning: `panic` setting is ignored for `test` profile
-    Finished test [unoptimized + debuginfo] target(s) in 0.65s
+    Finished test [unoptimized + debuginfo] target(s) in 0.10s
      Running target/debug/deps/experiment_rust_coredump-cb9e90b35b160182
 
 running 0 tests
@@ -280,81 +297,81 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
      Running target/debug/deps/the_test-bc4ecf0fb872ae26
 
 running 1 test
-pid 35677
+pid 36676
 hello world; about to panic
 thread 'the_test' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10ec34bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x10fd3abae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x10ec34bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x10fd3abae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x10ec34bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x10fd3abae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x10ec34bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x10fd3abae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10ec59b6c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x10fd5fb6c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x10ec31427 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10fd37427 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x10ec36e85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x10fd3ce85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x10ec36e85 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x10fd3ce85 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x10ec36e85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x10fd3ce85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x10ec36bc2 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x10fd3cbc2 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x10ec3743d - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  10:        0x10fd3d43d - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:486
-  11:        0x10ec5edf1 - std::panicking::begin_panic::he9feb19ab70ba4f7
+  11:        0x10fd64df1 - std::panicking::begin_panic::he9feb19ab70ba4f7
                                at src/libcore/alloc/layout.rs:363
-  12:        0x10ebe0fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
+  12:        0x10fce6fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
                                at src/lib.rs:40
-  13:        0x10ebe0f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
+  13:        0x10fce6f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
                                at src/lib.rs:35
-  14:        0x10ebe0d42 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
+  14:        0x10fce6d42 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
                                at src/lib.rs:28
-  15:        0x10ebe030d - the_test::the_test::h092422f81217c48d
+  15:        0x10fce630d - the_test::the_test::h092422f81217c48d
                                at tests/the_test.rs:7
-  16:        0x10ebe0021 - the_test::the_test::{{closure}}::h6c626283781fbe56
+  16:        0x10fce6021 - the_test::the_test::{{closure}}::h6c626283781fbe56
                                at tests/the_test.rs:6
-  17:        0x10ebdfe61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
+  17:        0x10fce5e61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  18:        0x10ec10a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
+  18:        0x10fd16a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  19:        0x10ec10a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
+  19:        0x10fd16a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  20:        0x10ec10a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
+  20:        0x10fd16a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  21:        0x10ec10a1e - std::panicking::try::h599c9f1cb721c875
+  21:        0x10fd16a1e - std::panicking::try::h599c9f1cb721c875
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  22:        0x10ec10a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
+  22:        0x10fd16a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  23:        0x10ec10a1e - test::run_test_in_process::haa928c9fa7857f00
+  23:        0x10fd16a1e - test::run_test_in_process::haa928c9fa7857f00
                                at src/libtest/lib.rs:541
-  24:        0x10ec10a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
+  24:        0x10fd16a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
                                at src/libtest/lib.rs:450
-  25:        0x10ebeab9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
+  25:        0x10fcf0b9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/sys_common/backtrace.rs:130
-  26:        0x10ebf00c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
+  26:        0x10fcf60c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:475
-  27:        0x10ebf00c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
+  27:        0x10fcf60c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  28:        0x10ebf00c5 - std::panicking::try::do_call::h43b1f18ab56485dc
+  28:        0x10fcf60c5 - std::panicking::try::do_call::h43b1f18ab56485dc
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  29:        0x10ebf00c5 - std::panicking::try::h536ce2f6f1ec0f3e
+  29:        0x10fcf60c5 - std::panicking::try::h536ce2f6f1ec0f3e
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  30:        0x10ebf00c5 - std::panic::catch_unwind::hc5210d52d983baec
+  30:        0x10fcf60c5 - std::panic::catch_unwind::hc5210d52d983baec
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  31:        0x10ebf00c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
+  31:        0x10fcf60c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:474
-  32:        0x10ebf00c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
+  32:        0x10fcf60c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  33:        0x10ec3cf9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
+  33:        0x10fd42f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  34:        0x10ec3cf9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
+  34:        0x10fd42f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  35:        0x10ec3cf9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
+  35:        0x10fd42f9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
                                at src/libstd/sys/unix/thread.rs:87
   36:     0x7fff69684109 - _ZL12preoptimized
 test the_test ... FAILED
@@ -382,7 +399,7 @@ try to catch panic: true
 + CARGO_PROFILE_TEST_PANIC=unwind
 + cargo +nightly test -Z panic-abort-tests -- --nocapture
 warning: `panic` setting is ignored for `test` profile
-    Finished test [unoptimized + debuginfo] target(s) in 0.01s
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
      Running target/debug/deps/experiment_rust_coredump-cb9e90b35b160182
 
 running 0 tests
@@ -398,92 +415,92 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
      Running target/debug/deps/the_test-bc4ecf0fb872ae26
 
 running 1 test
-pid 35682
+pid 36681
 attempting to catch panic
 hello world; about to panic
 thread 'the_test' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10d9c1bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x10b855bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x10d9c1bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x10b855bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x10d9c1bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x10b855bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x10d9c1bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x10b855bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10d9e6b6c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x10b87ab6c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x10d9be427 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10b852427 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x10d9c3e85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x10b857e85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x10d9c3e85 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x10b857e85 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x10d9c3e85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x10b857e85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x10d9c3bc2 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x10b857bc2 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x10d9c443d - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  10:        0x10b85843d - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:486
-  11:        0x10d9ebdf1 - std::panicking::begin_panic::he9feb19ab70ba4f7
+  11:        0x10b87fdf1 - std::panicking::begin_panic::he9feb19ab70ba4f7
                                at src/libcore/alloc/layout.rs:363
-  12:        0x10d96dfd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
+  12:        0x10b801fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
                                at src/lib.rs:40
-  13:        0x10d96df25 - experiment_rust_coredump::foo::h9b1993e1df418bce
+  13:        0x10b801f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
                                at src/lib.rs:35
-  14:        0x10d96d72c - experiment_rust_coredump::do_test::{{closure}}::hc35ff9f155c3e0fb
+  14:        0x10b80172c - experiment_rust_coredump::do_test::{{closure}}::hc35ff9f155c3e0fb
                                at src/lib.rs:25
-  15:        0x10d96f23e - std::panicking::try::do_call::h5681339acb924421
+  15:        0x10b80323e - std::panicking::try::do_call::h5681339acb924421
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  16:        0x10d96f44d - __rust_try
+  16:        0x10b80344d - __rust_try
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:0
-  17:        0x10d96f1c6 - std::panicking::try::h1cbe9147e8911901
+  17:        0x10b8031c6 - std::panicking::try::h1cbe9147e8911901
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  18:        0x10d96d6ed - std::panic::catch_unwind::hf5a9aefad245adb1
+  18:        0x10b8016ed - std::panic::catch_unwind::hf5a9aefad245adb1
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  19:        0x10d96dd90 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
+  19:        0x10b801d90 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
                                at src/lib.rs:25
-  20:        0x10d96d30d - the_test::the_test::h092422f81217c48d
+  20:        0x10b80130d - the_test::the_test::h092422f81217c48d
                                at tests/the_test.rs:7
-  21:        0x10d96d021 - the_test::the_test::{{closure}}::h6c626283781fbe56
+  21:        0x10b801021 - the_test::the_test::{{closure}}::h6c626283781fbe56
                                at tests/the_test.rs:6
-  22:        0x10d96ce61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
+  22:        0x10b800e61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  23:        0x10d99da1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
+  23:        0x10b831a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  24:        0x10d99da1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
+  24:        0x10b831a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  25:        0x10d99da1e - std::panicking::try::do_call::h080c4a3a379c4ffa
+  25:        0x10b831a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  26:        0x10d99da1e - std::panicking::try::h599c9f1cb721c875
+  26:        0x10b831a1e - std::panicking::try::h599c9f1cb721c875
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  27:        0x10d99da1e - std::panic::catch_unwind::hd66b5b4adc09dd00
+  27:        0x10b831a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  28:        0x10d99da1e - test::run_test_in_process::haa928c9fa7857f00
+  28:        0x10b831a1e - test::run_test_in_process::haa928c9fa7857f00
                                at src/libtest/lib.rs:541
-  29:        0x10d99da1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
+  29:        0x10b831a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
                                at src/libtest/lib.rs:450
-  30:        0x10d977b9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
+  30:        0x10b80bb9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/sys_common/backtrace.rs:130
-  31:        0x10d97d0c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
+  31:        0x10b8110c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:475
-  32:        0x10d97d0c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
+  32:        0x10b8110c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  33:        0x10d97d0c5 - std::panicking::try::do_call::h43b1f18ab56485dc
+  33:        0x10b8110c5 - std::panicking::try::do_call::h43b1f18ab56485dc
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  34:        0x10d97d0c5 - std::panicking::try::h536ce2f6f1ec0f3e
+  34:        0x10b8110c5 - std::panicking::try::h536ce2f6f1ec0f3e
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  35:        0x10d97d0c5 - std::panic::catch_unwind::hc5210d52d983baec
+  35:        0x10b8110c5 - std::panic::catch_unwind::hc5210d52d983baec
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  36:        0x10d97d0c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
+  36:        0x10b8110c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:474
-  37:        0x10d97d0c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
+  37:        0x10b8110c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  38:        0x10d9c9f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
+  38:        0x10b85df9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  39:        0x10d9c9f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
+  39:        0x10b85df9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  40:        0x10d9c9f9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
+  40:        0x10b85df9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
                                at src/libstd/sys/unix/thread.rs:87
   41:     0x7fff69684109 - _ZL12preoptimized
 caught! result: Err(Any)
@@ -529,85 +546,85 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 running 1 test
 registering panic handler from "coredump" crate
-pid 35688
+pid 36687
 hello world; about to panic
 thread 'the_test' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10f6b5bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x10f63cbae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x10f6b5bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x10f63cbae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x10f6b5bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x10f63cbae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x10f6b5bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x10f63cbae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10f6dab6c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x10f661b6c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x10f6b2427 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10f639427 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x10f6b7e85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x10f63ee85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x10f6b7e85 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x10f63ee85 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x10f6b7e85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x10f63ee85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x10f6b7bc2 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x10f63ebc2 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x10f6677b7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h28a72266dff5ac2c
+  10:        0x10f5ee7b7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h28a72266dff5ac2c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x10f665631 - coredump::register_panic_handler::{{closure}}::h52bfd52fcd2b7f78
+  11:        0x10f5ec631 - coredump::register_panic_handler::{{closure}}::h52bfd52fcd2b7f78
                                at /Users/dap/.cargo/registry/src/github.com-1ecc6299db9ec823/coredump-0.1.1/src/lib.rs:216
-  12:        0x10f6b8465 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  12:        0x10f63f465 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:490
-  13:        0x10f6dfdf1 - std::panicking::begin_panic::he9feb19ab70ba4f7
+  13:        0x10f666df1 - std::panicking::begin_panic::he9feb19ab70ba4f7
                                at src/libcore/alloc/layout.rs:363
-  14:        0x10f661fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
+  14:        0x10f5e8fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
                                at src/lib.rs:40
-  15:        0x10f661f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
+  15:        0x10f5e8f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
                                at src/lib.rs:35
-  16:        0x10f661d42 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
+  16:        0x10f5e8d42 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
                                at src/lib.rs:28
-  17:        0x10f66130d - the_test::the_test::h092422f81217c48d
+  17:        0x10f5e830d - the_test::the_test::h092422f81217c48d
                                at tests/the_test.rs:7
-  18:        0x10f661021 - the_test::the_test::{{closure}}::h6c626283781fbe56
+  18:        0x10f5e8021 - the_test::the_test::{{closure}}::h6c626283781fbe56
                                at tests/the_test.rs:6
-  19:        0x10f660e61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
+  19:        0x10f5e7e61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  20:        0x10f691a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
+  20:        0x10f618a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  21:        0x10f691a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
+  21:        0x10f618a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  22:        0x10f691a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
+  22:        0x10f618a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  23:        0x10f691a1e - std::panicking::try::h599c9f1cb721c875
+  23:        0x10f618a1e - std::panicking::try::h599c9f1cb721c875
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  24:        0x10f691a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
+  24:        0x10f618a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  25:        0x10f691a1e - test::run_test_in_process::haa928c9fa7857f00
+  25:        0x10f618a1e - test::run_test_in_process::haa928c9fa7857f00
                                at src/libtest/lib.rs:541
-  26:        0x10f691a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
+  26:        0x10f618a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
                                at src/libtest/lib.rs:450
-  27:        0x10f66bb9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
+  27:        0x10f5f2b9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/sys_common/backtrace.rs:130
-  28:        0x10f6710c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
+  28:        0x10f5f80c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:475
-  29:        0x10f6710c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
+  29:        0x10f5f80c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  30:        0x10f6710c5 - std::panicking::try::do_call::h43b1f18ab56485dc
+  30:        0x10f5f80c5 - std::panicking::try::do_call::h43b1f18ab56485dc
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  31:        0x10f6710c5 - std::panicking::try::h536ce2f6f1ec0f3e
+  31:        0x10f5f80c5 - std::panicking::try::h536ce2f6f1ec0f3e
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  32:        0x10f6710c5 - std::panic::catch_unwind::hc5210d52d983baec
+  32:        0x10f5f80c5 - std::panic::catch_unwind::hc5210d52d983baec
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  33:        0x10f6710c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
+  33:        0x10f5f80c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:474
-  34:        0x10f6710c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
+  34:        0x10f5f80c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  35:        0x10f6bdf9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
+  35:        0x10f644f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  36:        0x10f6bdf9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
+  36:        0x10f644f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  37:        0x10f6bdf9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
+  37:        0x10f644f9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
                                at src/libstd/sys/unix/thread.rs:87
   38:     0x7fff69684109 - _ZL12preoptimized
 failed to dump core: error: test failed, to rerun pass '--test the_test'
@@ -646,96 +663,96 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 running 1 test
 registering panic handler from "coredump" crate
-pid 35693
+pid 36692
 attempting to catch panic
 hello world; about to panic
 thread 'the_test' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x1053f8bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x1044c0bae - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x1053f8bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x1044c0bae - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x1053f8bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x1044c0bae - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x1053f8bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x1044c0bae - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10541db6c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x1044e5b6c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x1053f5427 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x1044bd427 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x1053fae85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x1044c2e85 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x1053fae85 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x1044c2e85 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x1053fae85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x1044c2e85 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x1053fabc2 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x1044c2bc2 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x1053aa7b7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h28a72266dff5ac2c
+  10:        0x1044727b7 - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::h28a72266dff5ac2c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x1053a8631 - coredump::register_panic_handler::{{closure}}::h52bfd52fcd2b7f78
+  11:        0x104470631 - coredump::register_panic_handler::{{closure}}::h52bfd52fcd2b7f78
                                at /Users/dap/.cargo/registry/src/github.com-1ecc6299db9ec823/coredump-0.1.1/src/lib.rs:216
-  12:        0x1053fb465 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  12:        0x1044c3465 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:490
-  13:        0x105422df1 - std::panicking::begin_panic::he9feb19ab70ba4f7
+  13:        0x1044eadf1 - std::panicking::begin_panic::he9feb19ab70ba4f7
                                at src/libcore/alloc/layout.rs:363
-  14:        0x1053a4fd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
+  14:        0x10446cfd1 - experiment_rust_coredump::bar::h16290d41fbef1cd3
                                at src/lib.rs:40
-  15:        0x1053a4f25 - experiment_rust_coredump::foo::h9b1993e1df418bce
+  15:        0x10446cf25 - experiment_rust_coredump::foo::h9b1993e1df418bce
                                at src/lib.rs:35
-  16:        0x1053a472c - experiment_rust_coredump::do_test::{{closure}}::hc35ff9f155c3e0fb
+  16:        0x10446c72c - experiment_rust_coredump::do_test::{{closure}}::hc35ff9f155c3e0fb
                                at src/lib.rs:25
-  17:        0x1053a623e - std::panicking::try::do_call::h5681339acb924421
+  17:        0x10446e23e - std::panicking::try::do_call::h5681339acb924421
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  18:        0x1053a644d - __rust_try
+  18:        0x10446e44d - __rust_try
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:0
-  19:        0x1053a61c6 - std::panicking::try::h1cbe9147e8911901
+  19:        0x10446e1c6 - std::panicking::try::h1cbe9147e8911901
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  20:        0x1053a46ed - std::panic::catch_unwind::hf5a9aefad245adb1
+  20:        0x10446c6ed - std::panic::catch_unwind::hf5a9aefad245adb1
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  21:        0x1053a4d90 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
+  21:        0x10446cd90 - experiment_rust_coredump::do_test::h7bb06a81ed9bde01
                                at src/lib.rs:25
-  22:        0x1053a430d - the_test::the_test::h092422f81217c48d
+  22:        0x10446c30d - the_test::the_test::h092422f81217c48d
                                at tests/the_test.rs:7
-  23:        0x1053a4021 - the_test::the_test::{{closure}}::h6c626283781fbe56
+  23:        0x10446c021 - the_test::the_test::{{closure}}::h6c626283781fbe56
                                at tests/the_test.rs:6
-  24:        0x1053a3e61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
+  24:        0x10446be61 - core::ops::function::FnOnce::call_once::h02a1843c5b924d0f
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  25:        0x1053d4a1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
+  25:        0x10449ca1e - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::h9200e7b4aa7e9522
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  26:        0x1053d4a1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
+  26:        0x10449ca1e - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h0ac9c9260096a457
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  27:        0x1053d4a1e - std::panicking::try::do_call::h080c4a3a379c4ffa
+  27:        0x10449ca1e - std::panicking::try::do_call::h080c4a3a379c4ffa
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  28:        0x1053d4a1e - std::panicking::try::h599c9f1cb721c875
+  28:        0x10449ca1e - std::panicking::try::h599c9f1cb721c875
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  29:        0x1053d4a1e - std::panic::catch_unwind::hd66b5b4adc09dd00
+  29:        0x10449ca1e - std::panic::catch_unwind::hd66b5b4adc09dd00
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  30:        0x1053d4a1e - test::run_test_in_process::haa928c9fa7857f00
+  30:        0x10449ca1e - test::run_test_in_process::haa928c9fa7857f00
                                at src/libtest/lib.rs:541
-  31:        0x1053d4a1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
+  31:        0x10449ca1e - test::run_test::run_test_inner::{{closure}}::he05216b3b7068803
                                at src/libtest/lib.rs:450
-  32:        0x1053aeb9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
+  32:        0x104476b9b - std::sys_common::backtrace::__rust_begin_short_backtrace::h0a41d2b7190f5f1c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/sys_common/backtrace.rs:130
-  33:        0x1053b40c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
+  33:        0x10447c0c5 - std::thread::Builder::spawn_unchecked::{{closure}}::{{closure}}::h1a719c9994b36d0c
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:475
-  34:        0x1053b40c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
+  34:        0x10447c0c5 - <std::panic::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h3d818970fcf0d936
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:318
-  35:        0x1053b40c5 - std::panicking::try::do_call::h43b1f18ab56485dc
+  35:        0x10447c0c5 - std::panicking::try::do_call::h43b1f18ab56485dc
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:297
-  36:        0x1053b40c5 - std::panicking::try::h536ce2f6f1ec0f3e
+  36:        0x10447c0c5 - std::panicking::try::h536ce2f6f1ec0f3e
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panicking.rs:274
-  37:        0x1053b40c5 - std::panic::catch_unwind::hc5210d52d983baec
+  37:        0x10447c0c5 - std::panic::catch_unwind::hc5210d52d983baec
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/panic.rs:394
-  38:        0x1053b40c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
+  38:        0x10447c0c5 - std::thread::Builder::spawn_unchecked::{{closure}}::hf393de63847fb1cb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libstd/thread/mod.rs:474
-  39:        0x1053b40c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
+  39:        0x10447c0c5 - core::ops::function::FnOnce::call_once{{vtable.shim}}::h1b7788ce3283ad11
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/libcore/ops/function.rs:232
-  40:        0x105400f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
+  40:        0x1044c8f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hc1ea5dc68d7bc5b3
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  41:        0x105400f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
+  41:        0x1044c8f9d - <alloc::boxed::Box<F> as core::ops::function::FnOnce<A>>::call_once::hdd92834a653e5885
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1076
-  42:        0x105400f9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
+  42:        0x1044c8f9d - std::sys::unix::thread::Thread::new::thread_start::h615070d544872cc0
                                at src/libstd/sys/unix/thread.rs:87
   43:     0x7fff69684109 - _ZL12preoptimized
 error: test failed, to rerun pass '--test the_test'
@@ -757,7 +774,7 @@ try to catch panic: false
 + CARGO_PROFILE_TEST_PANIC=abort
 + cargo +nightly test -Z panic-abort-tests -- --nocapture
 warning: `panic` setting is ignored for `test` profile
-    Finished test [unoptimized + debuginfo] target(s) in 0.03s
+    Finished test [unoptimized + debuginfo] target(s) in 0.01s
      Running target/debug/deps/experiment_rust_coredump-69b6b29a9871f2fc
 
 running 0 tests
@@ -773,39 +790,39 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
      Running target/debug/deps/the_test-aba89667d5d649e2
 
 running 1 test
-pid 35701
+pid 36698
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x106fc198e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x10a4b298e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x106fc198e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x10a4b298e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x106fc198e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x10a4b298e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x106fc198e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x10a4b298e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x106fe624c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x10a4d724c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x106fbe207 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10a4af207 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x106fc3c25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x10a4b4c25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x106fc3c25 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x10a4b4c25 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x106fc3c25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x10a4b4c25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x106fc3962 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x10a4b4962 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x106f9edaf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
+  10:        0x10a48fdaf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x106f9edaf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
+  11:        0x10a48fdaf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
                                at src/libtest/lib.rs:630
-  12:        0x106f9ee00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
+  12:        0x10a48fe00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
                                at src/libtest/lib.rs:640
-  13:        0x106fc4205 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  13:        0x10a4b5205 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:490
-  14:        0x106feb4ba - std::panicking::begin_panic::he9fe1837cd8a60ff
+  14:        0x10a4dc4ba - std::panicking::begin_panic::he9fe1837cd8a60ff
                                at src/libcore/alloc/layout.rs:363
 test the_test ... FAILED
 
@@ -852,40 +869,40 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
      Running target/debug/deps/the_test-aba89667d5d649e2
 
 running 1 test
-pid 35707
+pid 36704
 attempting to catch panic
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10ef9d98e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x1011a198e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x10ef9d98e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x1011a198e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x10ef9d98e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x1011a198e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x10ef9d98e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x1011a198e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10efc224c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x1011c624c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x10ef9a207 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10119e207 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x10ef9fc25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x1011a3c25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x10ef9fc25 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x1011a3c25 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x10ef9fc25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x1011a3c25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x10ef9f962 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x1011a3962 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x10ef7adaf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
+  10:        0x10117edaf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x10ef7adaf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
+  11:        0x10117edaf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
                                at src/libtest/lib.rs:630
-  12:        0x10ef7ae00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
+  12:        0x10117ee00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
                                at src/libtest/lib.rs:640
-  13:        0x10efa0205 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
+  13:        0x1011a4205 - std::panicking::rust_panic_with_hook::ha8ebb2ce42738316
                                at src/libstd/panicking.rs:490
-  14:        0x10efc74ba - std::panicking::begin_panic::he9fe1837cd8a60ff
+  14:        0x1011cb4ba - std::panicking::begin_panic::he9fe1837cd8a60ff
                                at src/libcore/alloc/layout.rs:363
 test the_test ... FAILED
 
@@ -933,35 +950,35 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 running 1 test
 registering panic handler from "coredump" crate
-pid 35713
+pid 36710
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x10f5d598e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x10fc4d98e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x10f5d598e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x10fc4d98e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x10f5d598e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x10fc4d98e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x10f5d598e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x10fc4d98e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x10f5fa24c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x10fc7224c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x10f5d2207 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x10fc4a207 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x10f5d7c25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x10fc4fc25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x10f5d7c25 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x10fc4fc25 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x10f5d7c25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x10fc4fc25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x10f5d7962 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x10fc4f962 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x10f5b2daf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
+  10:        0x10fc2adaf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x10f5b2daf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
+  11:        0x10fc2adaf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
                                at src/libtest/lib.rs:630
-  12:        0x10f5b2e00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
+  12:        0x10fc2ae00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
                                at src/libtest/lib.rs:640
 test the_test ... FAILED
 
@@ -992,7 +1009,7 @@ try to catch panic: true
 + CARGO_PROFILE_TEST_PANIC=abort
 + cargo +nightly test -Z panic-abort-tests -- --nocapture
 warning: `panic` setting is ignored for `test` profile
-    Finished test [unoptimized + debuginfo] target(s) in 0.01s
+    Finished test [unoptimized + debuginfo] target(s) in 0.00s
      Running target/debug/deps/experiment_rust_coredump-69b6b29a9871f2fc
 
 running 0 tests
@@ -1009,36 +1026,36 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 running 1 test
 registering panic handler from "coredump" crate
-pid 35719
+pid 36716
 attempting to catch panic
 hello world; about to panic
 thread 'main' panicked at 'boom', src/lib.rs:40:5
 stack backtrace:
-   0:        0x104cb598e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
+   0:        0x104f1a98e - backtrace::backtrace::libunwind::trace::h83d380479a349ab3
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/libunwind.rs:86
-   1:        0x104cb598e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
+   1:        0x104f1a98e - backtrace::backtrace::trace_unsynchronized::h4a3f7d20acb505b9
                                at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.46/src/backtrace/mod.rs:66
-   2:        0x104cb598e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
+   2:        0x104f1a98e - std::sys_common::backtrace::_print_fmt::hfc2e8ed9d735c796
                                at src/libstd/sys_common/backtrace.rs:78
-   3:        0x104cb598e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
+   3:        0x104f1a98e - <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt::hcfcbc219168eb9b7
                                at src/libstd/sys_common/backtrace.rs:59
-   4:        0x104cda24c - core::fmt::write::h26bd57c1fd6e9c98
+   4:        0x104f3f24c - core::fmt::write::h26bd57c1fd6e9c98
                                at src/libcore/fmt/mod.rs:1076
-   5:        0x104cb2207 - std::io::Write::write_fmt::h845f537fbf978cc8
+   5:        0x104f17207 - std::io::Write::write_fmt::h845f537fbf978cc8
                                at src/libstd/io/mod.rs:1537
-   6:        0x104cb7c25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
+   6:        0x104f1cc25 - std::sys_common::backtrace::_print::hced840f80fcbf47d
                                at src/libstd/sys_common/backtrace.rs:62
-   7:        0x104cb7c25 - std::sys_common::backtrace::print::he28990a439d37dd9
+   7:        0x104f1cc25 - std::sys_common::backtrace::print::he28990a439d37dd9
                                at src/libstd/sys_common/backtrace.rs:49
-   8:        0x104cb7c25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
+   8:        0x104f1cc25 - std::panicking::default_hook::{{closure}}::h3957e11a55ceea22
                                at src/libstd/panicking.rs:198
-   9:        0x104cb7962 - std::panicking::default_hook::h507e984f11c0212c
+   9:        0x104f1c962 - std::panicking::default_hook::h507e984f11c0212c
                                at src/libstd/panicking.rs:218
-  10:        0x104c92daf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
+  10:        0x104ef7daf - <alloc::boxed::Box<F> as core::ops::function::Fn<A>>::call::hc706306034a586eb
                                at /rustc/ad4bc3323b9299d867697e9653dcea1b5e1ad283/src/liballoc/boxed.rs:1090
-  11:        0x104c92daf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
+  11:        0x104ef7daf - test::run_test_in_spawned_subprocess::{{closure}}::h7d60623cbd8e588e
                                at src/libtest/lib.rs:630
-  12:        0x104c92e00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
+  12:        0x104ef7e00 - test::run_test_in_spawned_subprocess::{{closure}}::h92071491bdf7a6f2
                                at src/libtest/lib.rs:640
 test the_test ... FAILED
 

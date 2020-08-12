@@ -31,7 +31,7 @@ for strategy in $PANIC_STRATEGIES; do
 			ECD_USE_COREDUMP=$use_crate \
 			ECD_CATCH=$try_catch \
 			CARGO_PROFILE_DEV_PANIC=$strategy \
-			cargo run \
+			cargo run
 			echo "bash exit status = $?" )
 			echo
 		done
